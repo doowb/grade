@@ -6,19 +6,83 @@
 Install with [npm](npmjs.org):
 
 ```bash
-npm i grade --save-dev
+npm i -g grade
 ```
 
 ## Usage
 
+Create a new benchmark file in the `benchmark` folder and setup some benchmarks:
+
 ```js
 var grade = require('grade');
-console.log(grade('abc'));
-//=> ['a', 'b', 'c'];
+
+// create a new instance of Benchmark
+var Benchmark = grade.Benchmark;
+var benchmark = new Benchmark();
+
+// create a method that will run before the method under test
+var beforeI = 0;
+function before () {
+  beforeI++;
+}
+
+// create a method that will run after the method under test
+var afterI = 0;
+function after () {
+  afterI++;
+}
+
+// create the actual method under test
+var total = 0;
+var test = function () {
+  var i = 0;
+  while ((i++) < 50000) {}
+  total += (beforeI + afterI);
+};
+
+// add the actual benchmark to the list of benchmarks to run
+benchmark.add('main', test, before, after);
+
+// export the benchmark object so the runner knows what to run
+module.exports = benchmark;
 ```
 
-## API
+## Grade
+Grade the benchmarks and return the results
 
+* `options` {Object}: Options containing `files`  
+* `return` {Array} List of results
+
+## Benchmark
+Create a new instance of Benchmark.
+Use this to add benchmarks in a file.
+
+* `options` {Object}: Additional options to pass to `timer.execute`   
+
+
+Add a new benchmark to the run.
+
+* `title` {String}: Describe the benchmark. 
+* `fn` {Function}: The actual function to run. 
+* `before` {Function}: A function to call before the benchmark is run. 
+* `after` {Function}: A function to call after the benchmark is run.   
+
+
+Run the registered benchmarks and return timings.
+ 
+* `return` {Array} List of timings.
+
+## Timer
+Execute a benchmark for the specified number of seconds.
+Seconds is an accumulation of the actual run time of the
+function under test. This ensures the timing and setup/teardown
+steps don't interfer with the actual benchmark.
+
+* `max` {number}: Number of seconds to run the tests for. 
+* `fn` {Function}: Function under test 
+* `beforeFn` {Function}: Function to run before running the test 
+* `afterFn` {Function}: Function to run after running the test  
+* `return` {Object}   Results of the benchmark
 
 ## Author
 

@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+var log = require('verbalize');
+var argv = require('minimist')(process.argv.slice(2));
+
+var grade = require('..');
+
+
+/**
+ * Everything in the file should be customized
+ */
+
+
+// Verbalize `runner`
+log.runner = 'grade';
+
+// Use `-f` or `--file` to specify the source file
+var pattern  = argv._[0] || argv.f || argv.file;
+
+// Use `-m` or `--max` to specify the seconds to run each benchmark
+var max = (pattern ? argv._[1] : argv._[0]) || argv.m || argv.max;
+
+
+/**
+ * Application
+ */
+
+var options = {
+  file: pattern,
+  max: max
+};
+
+var results = grade(options);
+console.log('results', results);

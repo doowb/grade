@@ -33,6 +33,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "bin": {
+    "grade": "./bin/grade"
+  },
   "scripts": {
     "test": "mocha -R spec"
   },
@@ -41,5 +44,12 @@
     "mocha": "*",
     "verb": "~0.2.6",
     "verb-tag-jscomments": "^0.1.4"
+  },
+  "dependencies": {
+    "arrayify": "^1.0.0",
+    "globby": "^0.1.1",
+    "lodash": "^2.4.1",
+    "minimist": "^0.2.0",
+    "verbalize": "^0.1.2"
   }
 }

@@ -1,0 +1,45 @@
+{
+  "name": "grade",
+  "description": "Run benchmark files and gather reports.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/doowb/grade",
+  "author": {
+    "name": "Brian Woodward",
+    "url": "https://github.com/doowb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/doowb/grade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/doowb/grade/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/doowb/grade/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "docs",
+    "documentation",
+    "generate",
+    "generator",
+    "markdown",
+    "templates",
+    "verb"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "mocha": "*",
+    "verb": "~0.2.6",
+    "verb-tag-jscomments": "^0.1.4"
+  }
+}
